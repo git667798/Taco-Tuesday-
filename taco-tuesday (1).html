@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TACO TUESDAY 🌮</title>
+<link href="https://fonts.googleapis.com/css2?family=Boogaloo&family=Bebas+Neue&family=Nunito:wght@400;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{--fire:#FF3B00;--gold:#FFB800;--lime:#7FFF00;--teal:#00E5D1;--cream:#FFF8E7;--dark:#1A0A00}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--dark);color:var(--cream);font-family:'Nunito',sans-serif;overflow-x:hidden}
+.bg{position:fixed;inset:0;z-index:0;background:radial-gradient(ellipse at 20% 50%,rgba(255,59,0,.15),transparent 60%),radial-gradient(ellipse at 80% 20%,rgba(255,184,0,.12),transparent 50%);animation:bp 6s ease-in-out infinite alternate}
+@keyframes bp{from{opacity:.6}to{opacity:1}}
+.floats{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.f{position:absolute;opacity:.07;animation:fu linear infinite}
+@keyframes fu{from{transform:translateY(110vh) rotate(-15deg)}to{transform:translateY(-15vh) rotate(15deg)}}
+.wrap{position:relative;z-index:1;max-width:1100px;margin:0 auto;padding:0 1.5rem 4rem}
+
+/* HERO */
+.hero{text-align:center;padding:3rem 0 2rem}
+.hbadge{display:inline-block;background:var(--fire);color:#fff;font-family:'Bebas Neue',sans-serif;font-size:.85rem;letter-spacing:3px;padding:6px 18px;border-radius:100px;margin-bottom:1rem;box-shadow:0 0 20px rgba(255,59,0,.5);animation:pop .5s cubic-bezier(.34,1.56,.64,1) .2s both}
+@keyframes pop{from{transform:scale(0);opacity:0}to{transform:scale(1);opacity:1}}
+h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(4rem,14vw,9rem);line-height:.88;background:linear-gradient(135deg,var(--gold),var(--fire) 40%,#FF006E);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;filter:drop-shadow(0 4px 24px rgba(255,59,0,.4));animation:sd .7s ease .1s both}
+@keyframes sd{from{transform:translateY(-40px);opacity:0}to{transform:translateY(0);opacity:1}}
+.hsub{font-size:clamp(1rem,3vw,1.4rem);color:var(--gold);font-weight:700;margin-top:.5rem;animation:sd .7s ease .25s both}
+.hemoji{font-size:2.5rem;margin-top:1rem;letter-spacing:8px;animation:sd .7s ease .4s both}
+
+/* TICKER */
+.tick-wrap{background:var(--fire);overflow:hidden;padding:8px 0;margin:1.5rem 0;border-radius:8px}
+.tick-inner{display:flex;white-space:nowrap;animation:tick 20s linear infinite}
+.tick-item{font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:2px;color:#fff;padding:0 2rem}
+@keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* SEARCH */
+.scard{background:linear-gradient(135deg,rgba(255,184,0,.12),rgba(255,59,0,.08));border:2px solid rgba(255,184,0,.3);border-radius:24px;padding:2rem 2.5rem;margin:2rem 0;backdrop-filter:blur(10px);animation:fu2 .6s ease .4s both}
+@keyframes fu2{from{transform:translateY(30px);opacity:0}to{transform:translateY(0);opacity:1}}
+.scard h2{font-family:'Boogaloo',cursive;font-size:1.7rem;color:var(--gold);margin-bottom:.3rem;display:flex;align-items:center;gap:.5rem;flex-wrap:wrap}
+.shint{color:rgba(255,248,231,.55);font-size:.88rem;margin-bottom:1.2rem;line-height:1.5}
+.shint strong{color:rgba(255,248,231,.85)}
+.srow{display:grid;grid-template-columns:1fr auto auto;gap:.8rem;align-items:end}
+@media(max-width:600px){.srow{grid-template-columns:1fr;}.srow button{width:100%}}
+label{display:block;font-size:.75rem;font-weight:800;text-transform:uppercase;letter-spacing:1.5px;color:rgba(255,248,231,.5);margin-bottom:.4rem}
+input,textarea,select{width:100%;background:rgba(255,255,255,.07);border:1.5px solid rgba(255,184,0,.25);border-radius:12px;padding:.75rem 1rem;color:var(--cream);font-family:'Nunito',sans-serif;font-size:1rem;font-weight:600;outline:none;transition:border-color .2s,box-shadow .2s}
+input:focus,textarea:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(255,184,0,.15);background:rgba(255,255,255,.1)}
+textarea{resize:vertical;min-height:80px;font-size:.93rem;border-color:rgba(127,255,0,.2)}
+textarea:focus{border-color:var(--lime);box-shadow:0 0 0 3px rgba(127,255,0,.1)}
+.ac-wrap{position:relative}
+.ac-drop{position:absolute;top:calc(100% + 4px);left:0;right:0;background:#2A1200;border:1.5px solid rgba(255,184,0,.4);border-radius:12px;z-index:200;overflow:hidden;box-shadow:0 8px 32px rgba(0,0,0,.6);display:none}
+.ac-item{padding:.65rem 1rem;cursor:pointer;font-size:.95rem;font-weight:600;border-bottom:1px solid rgba(255,255,255,.05);transition:background .15s}
+.ac-item:last-child{border-bottom:none}
+.ac-item:hover{background:rgba(255,184,0,.15);color:var(--gold)}
+.btn{border:none;border-radius:12px;font-family:'Bebas Neue',sans-serif;letter-spacing:2px;cursor:pointer;transition:transform .15s,box-shadow .2s;white-space:nowrap;padding:.82rem 1.8rem;font-size:1.2rem}
+.btn:disabled{opacity:.5;cursor:not-allowed;transform:none!important}
+.btn-fire{background:linear-gradient(135deg,var(--fire),#FF006E);color:#fff;box-shadow:0 4px 20px rgba(255,59,0,.4)}
+.btn-fire:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 8px 28px rgba(255,59,0,.55)}
+.btn-cancel{background:rgba(255,255,255,.08);border:1.5px solid rgba(255,255,255,.15);color:rgba(255,248,231,.7);font-size:1.1rem;display:none}
+.btn-cancel:hover{background:rgba(255,59,0,.2);color:#fff}
+.btn-cancel.show{display:block}
+.btn-lime{background:linear-gradient(135deg,var(--lime),#00BFA5);color:var(--dark);box-shadow:0 4px 20px rgba(127,255,0,.25);margin-top:1rem}
+.btn-lime:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(127,255,0,.4)}
+.badge{display:inline-flex;align-items:center;background:rgba(127,255,0,.1);border:1px solid rgba(127,255,0,.25);color:var(--lime);font-size:.65rem;font-weight:800;letter-spacing:1px;text-transform:uppercase;padding:3px 9px;border-radius:100px;font-family:'Nunito',sans-serif}
+
+/* SECTION TITLE */
+.stitle{font-family:'Bebas Neue',sans-serif;font-size:2.3rem;letter-spacing:2px;margin:2.5rem 0 1rem;display:flex;align-items:center;gap:.6rem;flex-wrap:wrap}
+.acc{color:var(--gold)}
+
+/* CHAIN GRID */
+.cgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:1.2rem;margin-bottom:2rem}
+.ccard{background:linear-gradient(145deg,rgba(42,18,0,.9),rgba(30,10,0,.95));border:1.5px solid rgba(255,184,0,.15);border-radius:20px;padding:1.4rem 1.5rem;position:relative;transition:transform .2s,border-color .2s,box-shadow .2s;animation:fu2 .5s ease both}
+.ccard:hover{transform:translateY(-5px) scale(1.01);border-color:rgba(255,184,0,.45);box-shadow:0 12px 40px rgba(255,59,0,.2)}
+.cname{font-family:'Boogaloo',cursive;font-size:1.4rem;color:var(--gold);margin-bottom:.2rem}
+.cbadge{display:inline-block;background:rgba(255,59,0,.2);border:1px solid rgba(255,59,0,.4);color:#FF8A65;font-size:.7rem;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;padding:3px 10px;border-radius:100px;margin-bottom:.7rem}
+.cdesc{font-size:.92rem;line-height:1.55;color:rgba(255,248,231,.8)}
+.cprice{margin-top:.8rem;font-family:'Bebas Neue',sans-serif;font-size:1.6rem;color:var(--lime)}
+.cnote{margin-top:.3rem;font-size:.74rem;color:rgba(255,248,231,.35);font-style:italic}
+.corner{position:absolute;top:12px;right:12px;font-size:1.8rem;opacity:.55}
+
+/* RESULTS */
+#resSection{display:none}
+.spin-wrap{text-align:center;padding:4rem 1rem}
+.spin{font-size:4rem;display:inline-block;animation:sp .7s linear infinite;margin-bottom:1rem}
+@keyframes sp{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+.ltxt{font-family:'Boogaloo',cursive;font-size:1.6rem;color:var(--gold);animation:pulse 1s ease-in-out infinite alternate}
+.lsub{font-size:.88rem;color:rgba(255,248,231,.4);margin-top:.4rem}
+@keyframes pulse{from{opacity:.4}to{opacity:1}}
+.res-intro{background:linear-gradient(135deg,rgba(0,229,209,.08),rgba(255,184,0,.06));border:1.5px solid rgba(0,229,209,.2);border-radius:16px;padding:1.2rem 1.5rem;margin-bottom:1.5rem;font-size:.92rem;line-height:1.6;color:rgba(255,248,231,.8)}
+.res-intro strong{color:var(--teal)}
+.lcard{background:linear-gradient(145deg,rgba(55,20,0,.95),rgba(35,12,0,.9));border:1.5px solid rgba(0,229,209,.2);border-radius:20px;padding:1.4rem 1.6rem;margin-bottom:1rem;display:flex;gap:1.2rem;align-items:flex-start;transition:transform .2s,border-color .2s;animation:fu2 .4s ease both}
+.lcard:hover{transform:translateX(5px);border-color:rgba(0,229,209,.5);box-shadow:0 4px 24px rgba(0,229,209,.1)}
+.licon{font-size:2.8rem;flex-shrink:0;line-height:1}
+.lbody{flex:1;min-width:0}
+.lname{font-family:'Boogaloo',cursive;font-size:1.35rem;color:var(--teal);margin-bottom:.1rem}
+.ltype{font-size:.68rem;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;color:rgba(0,229,209,.5);margin-bottom:.35rem}
+.ldeal{font-size:.92rem;color:rgba(255,248,231,.85);line-height:1.55;margin-bottom:.3rem}
+.lmeta{font-size:.74rem;color:rgba(255,248,231,.35)}
+.lprice{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;color:var(--gold);flex-shrink:0;padding-top:.2rem}
+.ctag{display:inline-block;font-size:.63rem;font-weight:800;letter-spacing:.8px;text-transform:uppercase;padding:2px 7px;border-radius:100px;margin-left:.3rem;vertical-align:middle}
+.cc{background:rgba(127,255,0,.15);color:var(--lime);border:1px solid rgba(127,255,0,.3)}
+.cl{background:rgba(255,184,0,.15);color:var(--gold);border:1px solid rgba(255,184,0,.3)}
+.ck{background:rgba(255,59,0,.15);color:#FF8A65;border:1px solid rgba(255,59,0,.3)}
+.no-res{text-align:center;padding:3rem;color:rgba(255,248,231,.45)}
+.no-res div:first-child{font-size:4rem;margin-bottom:1rem}
+
+/* SUBMIT */
+.subcard{background:linear-gradient(135deg,rgba(127,255,0,.08),rgba(0,229,209,.06));border:2px solid rgba(127,255,0,.2);border-radius:24px;padding:2.5rem;margin:2.5rem 0;animation:fu2 .5s ease .5s both}
+.subcard h2{font-family:'Boogaloo',cursive;font-size:2rem;color:var(--lime);margin-bottom:.4rem}
+.subcard p{color:rgba(255,248,231,.7);margin-bottom:1.5rem;font-size:.92rem;line-height:1.6}
+.sgrid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+@media(max-width:560px){.sgrid{grid-template-columns:1fr}}
+.full{grid-column:1/-1}
+.fld{display:flex;flex-direction:column}
+
+/* TOAST */
+.toast{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%) translateY(130px);background:linear-gradient(135deg,var(--lime),#00E5D1);color:var(--dark);font-family:'Boogaloo',cursive;font-size:1.15rem;padding:.8rem 2rem;border-radius:100px;z-index:999;transition:transform .4s cubic-bezier(.34,1.56,.64,1);pointer-events:none;box-shadow:0 4px 30px rgba(127,255,0,.3);max-width:90vw;text-align:center}
+.toast.show{transform:translateX(-50%) translateY(0)}
+
+footer{text-align:center;padding:2rem 0;color:rgba(255,248,231,.22);font-size:.78rem;border-top:1px solid rgba(255,255,255,.05);margin-top:2rem}
+footer span{color:var(--fire)}
+</style>
+</head>
+<body>
+
+<div class="bg"></div>
+<div class="floats" id="floats"></div>
+
+<div class="wrap">
+
+  <div class="hero">
+    <div class="hbadge">🔥 Every Tuesday · All Across the USA 🔥</div>
+    <h1>TACO<br>TUESDAY</h1>
+    <div class="hsub">The Ultimate Deal Hunter's Guide to Cheap Tacos</div>
+    <div class="hemoji">🌮🌶️🔥💥🌮</div>
+  </div>
+
+  <div class="tick-wrap"><div class="tick-inner" id="ticker"></div></div>
+
+  <!-- SEARCH -->
+  <div class="scard">
+    <h2>📍 Find Deals Near You &nbsp;<span class="badge">⚡ Instant Results</span></h2>
+    <p class="shint">Type <strong>any city, ZIP code, or neighborhood</strong> — results load instantly. Covers 35+ major US cities plus all national chains.</p>
+    <div class="srow">
+      <div class="fld ac-wrap">
+        <label>City, Address, or ZIP Code</label>
+        <input id="locIn" type="text" placeholder="e.g. Austin TX · 84770 · Denver CO · 90210 · Chicago…" autocomplete="off">
+        <div class="ac-drop" id="acDrop"></div>
+      </div>
+      <button class="btn btn-fire" id="findBtn" onclick="find()">🔍 FIND DEALS</button>
+      <button class="btn btn-cancel" id="cancelBtn" onclick="cancel()">✕ CANCEL</button>
+    </div>
+  </div>
+
+  <!-- RESULTS -->
+  <div id="resSection">
+    <div class="stitle">📍 <span class="acc">Deals Near</span>&nbsp;<span id="resLoc" style="color:var(--teal);font-size:1.8rem"></span></div>
+    <div id="spinner" class="spin-wrap" style="display:none">
+      <div class="spin">🌮</div>
+      <div class="ltxt">Hunting taco deals…</div>
+      <div class="lsub">Checking chains, local joints &amp; hidden gems</div>
+      <div style="margin-top:1.2rem"><button class="btn btn-cancel" style="display:block;margin:0 auto" onclick="cancel()">✕ CANCEL</button></div>
+    </div>
+    <div id="resList"></div>
+  </div>
+
+  <!-- CHAIN DEALS -->
+  <div class="stitle">🏪 <span class="acc">National</span>&nbsp;Chain Deals</div>
+  <div class="cgrid" id="chainGrid"></div>
+
+  <!-- SUBMIT -->
+  <div class="subcard">
+    <h2>🌮 Know a Local Deal? Drop It!</h2>
+    <p>Help fellow taco hunters. Submit your local restaurant's Tuesday deal and spread the love.</p>
+    <div class="sgrid">
+      <div class="fld"><label>Restaurant Name</label><input id="sName" placeholder="e.g. El Rancho Tacos"></div>
+      <div class="fld"><label>City &amp; State</label><input id="sCity" placeholder="e.g. Denver, CO"></div>
+      <div class="fld"><label>The Deal</label><input id="sDeal" placeholder="e.g. $1 street tacos all day Tuesday"></div>
+      <div class="fld"><label>Price (optional)</label><input id="sPrice" placeholder="e.g. $1.50/taco"></div>
+      <div class="fld full"><label>Extra Info</label><textarea id="sNotes" placeholder="Hours, restrictions, dine-in only, etc."></textarea></div>
+    </div>
+    <button class="btn btn-lime" onclick="submitDeal()">🌮 SUBMIT DEAL</button>
+  </div>
+</div>
+
+<footer>
+  <div style="font-size:2rem;margin-bottom:.5rem">🌮🌶️🔥</div>
+  TACO TUESDAY FINDER — Made with <span>🔥</span> for taco lovers everywhere<br>
+  Always call ahead to confirm. Not affiliated with any restaurant chain.
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ── FLOATING EMOJIS ──────────────────────────────────────────────────────────
+[["🌮",5,1.5,12,0],["🌶️",15,3,17,2],["🌮",28,2,14,5],["🔥",40,2.5,19,1],
+ ["🌮",55,1.8,13,7],["🫔",68,3.5,16,3],["🌮",80,2,11,9],["💥",92,2.8,18,4]
+].forEach(([e,l,s,d,dl])=>{
+  const el=document.createElement('div');el.className='f';el.textContent=e;
+  el.style=`left:${l}%;font-size:${s}rem;animation-duration:${d}s;animation-delay:${dl}s`;
+  document.getElementById('floats').appendChild(el);
+});
+
+// ── TICKER ───────────────────────────────────────────────────────────────────
+const TICKS=["🌮 TACO TUESDAY DEALS","🔥 DEALS ACROSS THE USA","💥 BOGO AT CHAINS","🌶️ LOCAL SPOTS NEAR YOU","🎉 SAVE EVERY TUESDAY","⭐ TYPE ANY CITY OR ZIP","💰 $1 TACOS EXIST — FIND THEM","🌮 FAST FOOD TO LOCAL GEMS"];
+const tkEl=document.getElementById('ticker');
+[...TICKS,...TICKS].forEach(t=>{const s=document.createElement('span');s.className='tick-item';s.textContent=t;tkEl.appendChild(s);});
+
+// ── CHAIN DATA ───────────────────────────────────────────────────────────────
+const CHAINS=[
+  {e:"🛎️",n:"Taco Bell",b:"Fast Food Nationwide",d:"App drops weekly Tuesday specials — BOGO Crunchy Tacos, $2 Doritos Locos, free taco with purchase. Open Taco Bell Rewards app Tuesday morning.",p:"From $1.49",note:"Taco Bell app required · Nationwide"},
+  {e:"🌊",n:"Del Taco",b:"West/Southwest",d:"$1 crispy beef & chicken tacos all day Tuesday. Del Rewards members sometimes get a bonus free taco automatically.",p:"$1.00",note:"Del Rewards app · West/Southwest US"},
+  {e:"🎉",n:"Jack in the Box",b:"Fast Food",d:"2 tacos for $1.49 is a permanent deal — app promos stack on top Tuesday. Monster Tacos go on special periodically.",p:"2 for $1.49",note:"App promos · West/South US"},
+  {e:"🔴",n:"Chipotle",b:"Fast-Casual Nationwide",d:"Chipotle Rewards pushes Tuesday drops — free guac, BOGO bowls, free delivery. Deals rotate weekly so check the app Tuesday morning.",p:"App deals",note:"Chipotle Rewards app required"},
+  {e:"🌮",n:"Qdoba",b:"Fast-Casual Nationwide",d:"Free queso or protein upgrade with any taco order Tuesday. Qdoba Rewards stack for extra savings. BOGO events run monthly.",p:"Free upgrades",note:"Qdoba Rewards app"},
+  {e:"🏠",n:"On The Border",b:"Sit-Down Chain",d:"$2 street tacos dine-in on Tuesdays — chicken, beef, or shrimp. Usually paired with $2 margaritas. Confirm with your local location.",p:"$2 tacos",note:"Dine-in only · Call ahead"},
+  {e:"🌶️",n:"Moe's Southwest Grill",b:"Fast-Casual Nationwide",d:"Tuesday app alerts drop BOGO tacos or $5 taco + drink combos. Moe's Rockin' Rewards members get the alert first every week.",p:"BOGO / $5",note:"Moe's Rockin' Rewards app"},
+  {e:"💥",n:"Torchy's Tacos",b:"TX, CO, Southeast",d:"Weekly rotating Tuesday special — $3-4 specialty tacos that normally cost $7+. Follow your local Torchy's on Instagram for the weekly feature.",p:"$3–4",note:"TX, CO, expanding Southeast"},
+  {e:"🤠",n:"Taco Cabana",b:"Texas / Southwest",d:"$1.99 street tacos on Tuesdays, flour or corn. Combo deals with drinks under $5. Tex-Mex staple across Texas.",p:"$1.99",note:"Texas, NM, OK mainly"},
+  {e:"🌊",n:"Fuzzy's Taco Shop",b:"Regional Chain",d:"Taco Tuesday all day: $2 Baja fish tacos, $2 street tacos. Happy hour 2–7pm adds $2 draft beers. One of the best chain deals.",p:"$2 tacos",note:"TX, CO, Midwest, Southeast"},
+  {e:"🏔️",n:"Café Rio",b:"Mountain West",d:"Tuesday rewards promos through the Café Rio app — free add-ons and BOGO on select items. Dominant chain in Utah and Mountain West.",p:"App deals",note:"UT, NV, CO, AZ, WA"},
+  {e:"🌵",n:"Costa Vida",b:"Mountain West",d:"Tuesday app specials — fresh handmade tortilla tacos with rotating deals. Similar vibe to Café Rio.",p:"App deals",note:"UT, ID, WA, AZ"},
+];
+const cg=document.getElementById('chainGrid');
+CHAINS.forEach((d,i)=>{
+  cg.innerHTML+=`<div class="ccard" style="animation-delay:${.05+i*.07}s">
+    <div class="corner">${d.e}</div>
+    <div class="cname">${d.n}</div>
+    <div class="cbadge">${d.b}</div>
+    <div class="cdesc">${d.d}</div>
+    <div class="cprice">${d.p}</div>
+    <div class="cnote">${d.note}</div>
+  </div>`;
+});
+
+// ── LOCAL DATABASE ───────────────────────────────────────────────────────────
+const LOCAL={
+  austin:[
+    {e:"⭐",n:"Juan in a Million",t:"Local Icon",d:"Famous Don Juan Super Taco — $3 each Tuesday. Cash only. Massive portions, always a line.",p:"$3",a:"East Austin / Cesar Chavez",c:"confirmed"},
+    {e:"🌿",n:"Veracruz All Natural",t:"Local Spot",d:"$2 migas breakfast tacos Tuesday morning until noon. Handmade tortillas.",p:"$2",a:"Multiple Austin locations",c:"confirmed"},
+    {e:"🌮",n:"Tacodeli",t:"Local Chain",d:"$2 off any taco plate Tuesdays. Legendary Otto, Frontera Fundido, and Cowboy tacos.",p:"$2 off",a:"Multiple Austin locations",c:"confirmed"},
+  ],
+  houston:[
+    {e:"🤠",n:"Tacos Tierra Caliente",t:"Local Icon",d:"$1 beef/chicken/barbacoa tacos all day Tuesday. Houston institution — cash only.",p:"$1",a:"Multiple Houston locations",c:"confirmed"},
+    {e:"⭐",n:"El Real Tex-Mex",t:"Sit-Down",d:"Tuesday taco plate: 4 tacos + rice + beans for $12. Iconic Houston Tex-Mex.",p:"$12 plate",a:"Midtown Houston",c:"confirmed"},
+    {e:"💥",n:"Torchy's Tacos",t:"Fast-Casual",d:"Weekly rotating $3-4 Tuesday special — check Instagram for which taco.",p:"$3–4",a:"Multiple Houston locations",c:"confirmed"},
+  ],
+  dallas:[
+    {e:"🎨",n:"Velvet Taco",t:"Fast-Casual",d:"Weekly Rotating Taco (WRT) on Tuesdays — unique protein, $4-5. Most creative Tuesday deal in Dallas.",p:"$4–5",a:"Multiple Dallas locations",c:"confirmed"},
+    {e:"💥",n:"Torchy's Tacos",t:"Fast-Casual",d:"Weekly rotating Tuesday special taco $3-4. Multiple DFW locations.",p:"$3–4",a:"Multiple Dallas locations",c:"confirmed"},
+    {e:"🤠",n:"Taco Cabana",t:"Fast Food",d:"$1.99 street tacos all day Tuesday across all DFW locations.",p:"$1.99",a:"Citywide DFW",c:"confirmed"},
+  ],
+  "san antonio":[
+    {e:"🌺",n:"Taco Taco Cafe",t:"Local Icon",d:"$1.50 breakfast tacos served all day Tuesday. San Antonio legend for 30+ years.",p:"$1.50",a:"1146 LaFitte, San Antonio",c:"confirmed"},
+    {e:"⭐",n:"Garcia's Mexican Restaurant",t:"Local Icon",d:"$2 puffy tacos on Tuesdays — a San Antonio original. Puffy tacos only exist here.",p:"$2",a:"San Antonio West Side",c:"confirmed"},
+    {e:"🤠",n:"Taco Cabana",t:"Fast Food",d:"$1.99 street tacos all day. Every SA location participates.",p:"$1.99",a:"Citywide San Antonio",c:"confirmed"},
+  ],
+  "los angeles":[
+    {e:"🚚",n:"Leo's Tacos Truck",t:"Food Truck",d:"Al pastor tacos $1.25 each all day Tuesday. Widely considered best taco truck in LA.",p:"$1.25",a:"Multiple LA locations",c:"confirmed"},
+    {e:"🦐",n:"Coni'Seafood",t:"Local Spot",d:"Shrimp taco Tuesday: 3 shrimp tacos for $9. Incredible Nayarit-style seafood.",p:"$3/ea",a:"Inglewood, CA",c:"confirmed"},
+    {e:"🫔",n:"Guisados",t:"Local Chain",d:"$3 braised meat tacos Tuesday — rotating guisado on special. Best handmade tortillas in LA.",p:"$3",a:"East LA, Silver Lake, Boyle Heights",c:"confirmed"},
+  ],
+  "san diego":[
+    {e:"🌊",n:"Lolita's Taco Shop",t:"Local Chain",d:"$1.50 California burritos and tacos on Tuesdays. SD fast food institution.",p:"$1.50",a:"Multiple SD locations",c:"confirmed"},
+    {e:"🇲🇽",n:"Tacos El Gordo",t:"Local Icon",d:"$2 adobada tacos Tuesday — Tijuana-style, best in San Diego.",p:"$2",a:"Chula Vista & Oceanside",c:"confirmed"},
+  ],
+  "san francisco":[
+    {e:"⭐",n:"La Taqueria",t:"Local Icon",d:"$3 carnitas or carne asada tacos Tuesday. James Beard Award-winning Mission District legend.",p:"$3",a:"Mission District, SF",c:"confirmed"},
+    {e:"🌮",n:"Tacolicious",t:"Local Chain",d:"$3 tacos all day Tuesday + $5 margaritas. Multiple Bay Area locations.",p:"$3",a:"Multiple Bay Area locations",c:"confirmed"},
+  ],
+  denver:[
+    {e:"🏔️",n:"Pinche Tacos",t:"Local Chain",d:"$2 street tacos Tuesday — 6 protein options. Denver institution for a decade.",p:"$2",a:"Multiple Denver locations",c:"confirmed"},
+    {e:"🍺",n:"Comida",t:"Local Spot",d:"$1.50 tacos + $3 Mexican lagers Tuesday all day. RiNo Art District hotspot.",p:"$1.50",a:"RiNo Art District",c:"confirmed"},
+    {e:"🌊",n:"Fuzzy's Taco Shop",t:"Fast-Casual",d:"$2 Baja fish tacos + happy hour specials 2-7pm Tuesday.",p:"$2",a:"Multiple Denver locations",c:"confirmed"},
+  ],
+  "colorado springs":[
+    {e:"🌊",n:"Fuzzy's Taco Shop",t:"Fast-Casual",d:"$2 Baja fish and street tacos Tuesday + $2 draft beers happy hour 2-7pm.",p:"$2",a:"Colorado Springs",c:"confirmed"},
+    {e:"🌮",n:"Local Mexican spots",t:"Local Spots",d:"Many COS restaurants run $1-2 taco specials Tuesday — ask at your neighborhood taqueria.",p:"$1–2",a:"Citywide Colorado Springs",c:"likely"},
+  ],
+  chicago:[
+    {e:"🎸",n:"Big Star",t:"Local Icon",d:"$2 pork belly tacos every Tuesday. Wicker Park's most beloved Taco Tuesday destination.",p:"$2",a:"Wicker Park, Chicago",c:"confirmed"},
+    {e:"🏺",n:"Antique Taco",t:"Local Spot",d:"3 tacos + chips + salsa for $14 on Tuesdays. Rotating seasonal taco menu.",p:"$14 combo",a:"Wicker Park & River North",c:"confirmed"},
+    {e:"🌮",n:"Dos Urban Cantina",t:"Local Spot",d:"$3 street tacos Tuesday with rotating proteins. Logan Square gem.",p:"$3",a:"Logan Square, Chicago",c:"confirmed"},
+  ],
+  nashville:[
+    {e:"🎵",n:"Mas Tacos Por Favor",t:"Local Icon",d:"$2 tacos every Tuesday. Teresa Mason's legendary East Nashville spot — always a line, always worth it.",p:"$2",a:"East Nashville",c:"confirmed"},
+    {e:"💥",n:"Torchy's Tacos",t:"Fast-Casual",d:"Weekly rotating Tuesday special taco $3-4. Check their Instagram.",p:"$3–4",a:"Multiple Nashville locations",c:"confirmed"},
+  ],
+  miami:[
+    {e:"🌴",n:"Coyo Taco",t:"Local Chain",d:"Tuesday $2 taco specials — handmade corn tortillas, rotating proteins. Wynwood staple.",p:"$2",a:"Wynwood & Coconut Grove",c:"confirmed"},
+    {e:"👨‍🍳",n:"Alter / Chugging Juice",t:"Local Spot",d:"$3 chef-driven tacos Tuesday. Creative proteins you won't find at chains.",p:"$3",a:"Wynwood, Miami",c:"likely"},
+  ],
+  orlando:[
+    {e:"⭐",n:"Hunger Street Tacos",t:"Local Spot",d:"$2 street tacos all day Tuesday. James Beard-nominated chef. Best taco in Orlando.",p:"$2",a:"Mills 50 District, Orlando",c:"confirmed"},
+    {e:"🥢",n:"Tako Cheena",t:"Local Spot",d:"$2.50 Asian-fusion tacos Tuesday — pork belly, kimchi, Thai basil.",p:"$2.50",a:"Downtown Orlando",c:"confirmed"},
+  ],
+  tampa:[
+    {e:"🚌",n:"Taco Bus",t:"Local Icon",d:"$2 street tacos Tuesday, 24-hour taco joint. Tampa institution.",p:"$2",a:"Multiple Tampa locations",c:"confirmed"},
+  ],
+  "new york":[
+    {e:"🗽",n:"Los Tacos No.1",t:"Local Icon",d:"$2 off any order over $12 on Tuesdays. Best carne asada in NYC at Chelsea Market.",p:"$2 off",a:"Chelsea Market & Times Square",c:"confirmed"},
+    {e:"🏖️",n:"Tacombi",t:"Local Chain",d:"Tuesday happy hour 3-6pm: $3 tacos on select options + $5 agua fresca.",p:"$3",a:"Multiple NYC locations",c:"confirmed"},
+    {e:"🏄",n:"Rockaway Taco",t:"Local Spot",d:"$2 fish tacos on Tuesdays. Rockaway Beach institution.",p:"$2",a:"Rockaway Beach, Queens",c:"likely"},
+  ],
+  brooklyn:[
+    {e:"🗽",n:"Los Tacos No.1",t:"Local Icon",d:"$2 off any order over $12 Tuesdays. Closest location to Brooklyn at Chelsea Market.",p:"$2 off",a:"Chelsea Market, Manhattan",c:"confirmed"},
+    {e:"🏖️",n:"Tacombi",t:"Local Chain",d:"Tuesday happy hour 3-6pm: $3 tacos + $5 agua fresca. Multiple NYC/Brooklyn area locations.",p:"$3",a:"Multiple NYC locations",c:"confirmed"},
+  ],
+  "las vegas":[
+    {e:"🎰",n:"Tacos El Gordo",t:"Local Icon",d:"$2 adobada tacos Tuesday. Most authentic Tijuana-style tacos in Vegas.",p:"$2",a:"Strip & Downtown Las Vegas",c:"confirmed"},
+    {e:"🐰",n:"Velveteen Rabbit",t:"Local Spot",d:"$3 creative tacos Tuesday happy hour 4-7pm. Arts District neighborhood bar.",p:"$3",a:"Arts District, Las Vegas",c:"likely"},
+  ],
+  phoenix:[
+    {e:"🌵",n:"Chino Bandido",t:"Local Icon",d:"Tuesday: $1.75 tacos, minimum 3. Chinese-Mexican fusion unique to Phoenix.",p:"$1.75",a:"North Phoenix",c:"confirmed"},
+    {e:"🇲🇽",n:"Tortas Paquime",t:"Local Icon",d:"$1.50 street tacos Tuesday. Authentic Chihuahua-style, cash only.",p:"$1.50",a:"South Phoenix",c:"confirmed"},
+  ],
+  tucson:[
+    {e:"🌵",n:"Güeros Taco Bar",t:"Local Spot",d:"$2 tacos Tuesday on the 4th Ave strip. Outdoor seating, great vibe.",p:"$2",a:"4th Avenue, Tucson",c:"confirmed"},
+    {e:"⭐",n:"El Güero Canelo",t:"Local Icon",d:"$1.50 Sonoran hot dog tacos Tuesday. James Beard Award winner.",p:"$1.50",a:"Multiple Tucson locations",c:"confirmed"},
+  ],
+  "salt lake city":[
+    {e:"🦎",n:"Red Iguana",t:"Local Icon",d:"$3 mole tacos Tuesday — multiple legendary mole sauces. SLC institution for 40+ years.",p:"$3",a:"Downtown Salt Lake City",c:"confirmed"},
+    {e:"🏔️",n:"Café Rio",t:"Regional Chain",d:"Tuesday Rewards app deals — BOGO and free add-ons through the app.",p:"App deals",a:"Multiple SLC locations",c:"confirmed"},
+    {e:"💎",n:"Tacos El Salvadoreño",t:"Local Spot",d:"$1.50 pupusa-style tacos Tuesday. Authentic Central American-Mexican fusion.",p:"$1.50",a:"West Valley City / SLC",c:"likely"},
+  ],
+  "st george":[
+    {e:"🏔️",n:"Café Rio",t:"Regional Chain",d:"Tuesday Rewards app deals — BOGO and free add-ons. Top fast-casual option in St. George.",p:"App deals",a:"St. George, UT",c:"confirmed"},
+    {e:"🌵",n:"Costa Vida",t:"Regional Chain",d:"Tuesday app specials — fresh tortilla tacos with rotating deals.",p:"App deals",a:"St. George, UT",c:"confirmed"},
+    {e:"🌮",n:"Local spots on Bluff St & Dixie Dr",t:"Local Spots",d:"Several local Mexican restaurants in St. George run $1-2 taco specials on Tuesdays — check the Bluff St and Dixie Drive corridors.",p:"$1–2",a:"St. George, UT",c:"likely"},
+    {e:"🛎️",n:"Taco Bell",t:"Fast Food",d:"Check Taco Bell Rewards app for this week's Tuesday deal at St. George locations.",p:"From $1.49",a:"Multiple St. George locations",c:"confirmed"},
+  ],
+  provo:[
+    {e:"🏔️",n:"Café Rio",t:"Regional Chain",d:"Tuesday Rewards app deals. Utah County staple.",p:"App deals",a:"Provo, UT",c:"confirmed"},
+    {e:"🌮",n:"Los Hermanos",t:"Local Spot",d:"$2 street tacos Tuesday — family-owned local Provo Mexican restaurant for decades.",p:"$2",a:"Provo, UT",c:"likely"},
+  ],
+  ogden:[
+    {e:"🏔️",n:"Café Rio",t:"Regional Chain",d:"Tuesday Rewards app deals.",p:"App deals",a:"Ogden, UT",c:"confirmed"},
+    {e:"🌮",n:"Local taquerias on Washington Blvd",t:"Local Spots",d:"Ogden has a great local Mexican food scene — ask any taqueria on Washington Blvd about Tuesday specials.",p:"$1–2",a:"Washington Blvd, Ogden, UT",c:"likely"},
+  ],
+  albuquerque:[
+    {e:"🌶️",n:"El Modelo Mexican Foods",t:"Local Icon",d:"$1.50 red or green chile tacos Tuesday. Made fresh since 1929.",p:"$1.50",a:"Downtown Albuquerque",c:"confirmed"},
+    {e:"🌯",n:"Twisters Burgers & Burritos",t:"Local Chain",d:"$1 tacos Tuesday. ABQ institution.",p:"$1",a:"Multiple ABQ locations",c:"confirmed"},
+  ],
+  atlanta:[
+    {e:"💀",n:"Bone Garden Cantina",t:"Local Spot",d:"$2 Day of the Dead tacos Tuesday. Quirky, creative, and genuinely good.",p:"$2",a:"West Midtown Atlanta",c:"confirmed"},
+    {e:"🎪",n:"Muchacho",t:"Local Chain",d:"$3 chef-driven tacos Tuesday. Ponce City Market and beyond.",p:"$3",a:"Multiple Atlanta locations",c:"confirmed"},
+  ],
+  charlotte:[
+    {e:"🐟",n:"Cabo Fish Taco",t:"Local Chain",d:"$2 fish tacos Tuesday all day. Charlotte's best fish taco since 2003.",p:"$2",a:"NoDa & South End",c:"confirmed"},
+    {e:"🐷",n:"Pinky's Westside Grill",t:"Local Spot",d:"$2 creative tacos Tuesday — rotating weird/wonderful options.",p:"$2",a:"Westside Charlotte",c:"confirmed"},
+  ],
+  raleigh:[
+    {e:"🌸",n:"Brewery Bhavana",t:"Local Icon",d:"$3 Asian-inspired tacos Tuesday. James Beard-nominated, best creative tacos in Raleigh.",p:"$3",a:"Downtown Raleigh",c:"confirmed"},
+  ],
+  seattle:[
+    {e:"🌧️",n:"Rancho Bravo Tacos",t:"Local Icon",d:"$2 carne asada & al pastor tacos Tuesday. Capitol Hill dive, cash only, legendary.",p:"$2",a:"Capitol Hill, Seattle",c:"confirmed"},
+    {e:"🦑",n:"Tacos Chukis",t:"Local Spot",d:"$2 tacos Tuesday — best price-to-quality ratio in Seattle.",p:"$2",a:"Capitol Hill & U-District",c:"confirmed"},
+  ],
+  portland:[
+    {e:"🌲",n:"Güero",t:"Local Spot",d:"$3 creative tacos Tuesday happy hour. Portland's trendiest taco bar.",p:"$3",a:"Division Street, Portland",c:"confirmed"},
+    {e:"🇲🇽",n:"Taqueria Santa Cruz",t:"Local Spot",d:"$1.50 street tacos all day Tuesday. Authentic Mexican, best deal in PDX.",p:"$1.50",a:"Multiple Portland locations",c:"confirmed"},
+  ],
+  minneapolis:[
+    {e:"🐱",n:"Taco Cat",t:"Local Spot",d:"$2 creative tacos Tuesday. Northeast Minneapolis, always a line.",p:"$2",a:"Northeast Minneapolis",c:"confirmed"},
+    {e:"😂",n:"El Taco Riendo",t:"Local Spot",d:"$1.50 authentic street tacos Tuesday. Best carnitas in the Twin Cities.",p:"$1.50",a:"Lake Street, Minneapolis",c:"confirmed"},
+  ],
+  "new orleans":[
+    {e:"🎷",n:"Juan's Flying Burrito",t:"Local Icon",d:"$3 creative tacos Tuesday. NOLA taco institution — Mardi Gras meets Mexico.",p:"$3",a:"Magazine St & Mid-City",c:"confirmed"},
+    {e:"🚚",n:"Taceaux Loceaux",t:"Food Truck",d:"$2.50 tacos Tuesday at rotating locations. Follow on social for the spot.",p:"$2.50",a:"Rotating NOLA locations",c:"likely"},
+  ],
+  "kansas city":[
+    {e:"🦐",n:"Jarocho Seafood",t:"Local Spot",d:"$2 shrimp & fish tacos Tuesday. KC's best-kept secret taco spot.",p:"$2",a:"Southwest Boulevard, KC",c:"confirmed"},
+    {e:"🌊",n:"Fuzzy's Taco Shop",t:"Fast-Casual",d:"$2 Baja fish tacos Tuesday + happy hour 2-7pm.",p:"$2",a:"Multiple KC locations",c:"confirmed"},
+  ],
+  detroit:[
+    {e:"🚗",n:"Taqueria El Rey",t:"Local Icon",d:"$1.50 authentic tacos Tuesday. Mexican Town institution for 25 years.",p:"$1.50",a:"Mexican Town, Detroit",c:"confirmed"},
+  ],
+  columbus:[
+    {e:"🌮",n:"Condado Tacos",t:"Local Chain",d:"$2 build-your-own tacos Tuesday. Columbus-born chain, wildly popular.",p:"$2",a:"Multiple Columbus locations",c:"confirmed"},
+  ],
+  indianapolis:[
+    {e:"🌮",n:"Condado Tacos",t:"Local Chain",d:"$2 build-your-own tacos Tuesday. Great Columbus-based chain with Indy locations.",p:"$2",a:"Indianapolis",c:"confirmed"},
+  ],
+  "oklahoma city":[
+    {e:"🤠",n:"Taco Cabana",t:"Fast Food",d:"$1.99 street tacos all day Tuesday.",p:"$1.99",a:"Multiple OKC locations",c:"confirmed"},
+  ],
+};
+
+// ── ZIP → CITY ───────────────────────────────────────────────────────────────
+const ZIPS={
+  "787":"austin","788":"austin","786":"austin",
+  "900":"los angeles","901":"los angeles","902":"los angeles","903":"los angeles","904":"los angeles","905":"los angeles","906":"los angeles",
+  "919":"san diego","920":"san diego","921":"san diego",
+  "941":"san francisco","940":"san francisco","942":"san francisco",
+  "800":"denver","801":"denver","802":"denver","803":"denver","804":"denver",
+  "805":"colorado springs","806":"colorado springs",
+  "847":"st george","848":"st george",
+  "841":"salt lake city","840":"salt lake city",
+  "843":"provo","844":"provo",
+  "842":"ogden","843":"ogden",
+  "606":"chicago","607":"chicago","608":"chicago","609":"chicago",
+  "370":"nashville","371":"nashville","372":"nashville",
+  "331":"miami","330":"miami","332":"miami",
+  "328":"orlando","327":"orlando","329":"orlando",
+  "336":"tampa","335":"tampa","337":"tampa",
+  "100":"new york","101":"new york","102":"new york","103":"new york","104":"new york",
+  "112":"brooklyn","113":"brooklyn","114":"brooklyn",
+  "891":"las vegas","890":"las vegas","889":"las vegas",
+  "850":"phoenix","851":"phoenix","852":"phoenix","853":"phoenix","854":"phoenix",
+  "857":"tucson","856":"tucson","855":"tucson",
+  "770":"houston","771":"houston","772":"houston","773":"houston","774":"houston",
+  "752":"dallas","750":"dallas","751":"dallas","753":"dallas","754":"dallas",
+  "782":"san antonio","781":"san antonio","780":"san antonio",
+  "300":"atlanta","301":"atlanta","302":"atlanta","303":"atlanta",
+  "282":"charlotte","281":"charlotte","280":"charlotte",
+  "276":"raleigh","275":"raleigh","277":"raleigh",
+  "981":"seattle","980":"seattle","982":"seattle",
+  "972":"portland","970":"portland","971":"portland",
+  "554":"minneapolis","553":"minneapolis","551":"minneapolis",
+  "701":"new orleans","700":"new orleans",
+  "641":"kansas city","640":"kansas city",
+  "481":"detroit","482":"detroit","480":"detroit",
+  "432":"columbus","430":"columbus","431":"columbus",
+  "871":"albuquerque","870":"albuquerque","872":"albuquerque",
+  "460":"indianapolis","461":"indianapolis","462":"indianapolis",
+  "731":"oklahoma city","730":"oklahoma city",
+};
+
+const STATE_MAP={
+  tx:["austin","houston","dallas","san antonio"],ut:["st george","salt lake city","provo","ogden"],
+  co:["denver","colorado springs"],ca:["los angeles","san diego","san francisco"],
+  il:["chicago"],tn:["nashville"],fl:["miami","orlando","tampa"],ny:["new york","brooklyn"],
+  nv:["las vegas"],az:["phoenix","tucson"],ga:["atlanta"],nc:["charlotte","raleigh"],
+  wa:["seattle"],or:["portland"],mn:["minneapolis"],la:["new orleans"],mo:["kansas city"],
+  mi:["detroit"],oh:["columbus"],nm:["albuquerque"],in:["indianapolis"],ok:["oklahoma city"],
+};
+
+const SUGGESTIONS=[
+  "Austin, TX","Houston, TX","Dallas, TX","San Antonio, TX","Fort Worth, TX",
+  "Los Angeles, CA","San Diego, CA","San Francisco, CA","Sacramento, CA",
+  "Phoenix, AZ","Tucson, AZ","Scottsdale, AZ",
+  "Denver, CO","Colorado Springs, CO","Boulder, CO","Fort Collins, CO",
+  "Chicago, IL","Nashville, TN","Memphis, TN",
+  "Miami, FL","Orlando, FL","Tampa, FL","Jacksonville, FL",
+  "New York, NY","Brooklyn, NY","Queens, NY",
+  "Las Vegas, NV","Reno, NV",
+  "Portland, OR","Seattle, WA","Spokane, WA",
+  "Atlanta, GA","Charlotte, NC","Raleigh, NC","Durham, NC",
+  "Albuquerque, NM","Santa Fe, NM",
+  "Salt Lake City, UT","St. George, UT","Provo, UT","Ogden, UT",
+  "Kansas City, MO","St. Louis, MO","Oklahoma City, OK","Tulsa, OK",
+  "Minneapolis, MN","Columbus, OH","Cleveland, OH","Cincinnati, OH",
+  "Detroit, MI","New Orleans, LA","Indianapolis, IN",
+  "Louisville, KY","Pittsburgh, PA","Philadelphia, PA","Baltimore, MD",
+  "Richmond, VA","Birmingham, AL","Omaha, NE","Boise, ID",
+  "Anchorage, AK","Honolulu, HI",
+];
+
+function cityFromInput(s){
+  s=s.toLowerCase().trim();
+  for(const c of Object.keys(LOCAL)) if(s.includes(c)) return c;
+  const zip=s.replace(/\s/g,'');
+  if(/^\d{5}/.test(zip)&&ZIPS[zip.slice(0,3)]) return ZIPS[zip.slice(0,3)];
+  for(const[st,cs] of Object.entries(STATE_MAP)){
+    if(s.includes(`, ${st}`)||s.endsWith(` ${st}`)){
+      for(const c of cs) if(s.includes(c)) return c;
+      return cs[0];
+    }
+  }
+  return null;
+}
+
+// ── AUTOCOMPLETE ─────────────────────────────────────────────────────────────
+const locIn=document.getElementById('locIn');
+const acDrop=document.getElementById('acDrop');
+locIn.addEventListener('input',()=>{
+  const v=locIn.value.trim().toLowerCase();
+  if(v.length<2){acDrop.style.display='none';return;}
+  const m=SUGGESTIONS.filter(s=>s.toLowerCase().includes(v)).slice(0,7);
+  if(!m.length){acDrop.style.display='none';return;}
+  acDrop.innerHTML=m.map(s=>`<div class="ac-item" onclick="pick('${s.replace(/'/g,"\\'")}')">📍 ${s}</div>`).join('');
+  acDrop.style.display='block';
+});
+document.addEventListener('click',e=>{if(!e.target.closest('.ac-wrap'))acDrop.style.display='none';});
+locIn.addEventListener('keydown',e=>{if(e.key==='Enter'){acDrop.style.display='none';find();}if(e.key==='Escape')acDrop.style.display='none';});
+function pick(c){locIn.value=c;acDrop.style.display='none';locIn.focus();}
+
+// ── SEARCH ───────────────────────────────────────────────────────────────────
+let abortCtrl=null;
+function find(){
+  const loc=locIn.value.trim();
+  if(!loc){toast('📍 Enter a city, address, or ZIP first!');return;}
+  acDrop.style.display='none';
+  document.getElementById('findBtn').disabled=true;
+  document.getElementById('cancelBtn').classList.add('show');
+  document.getElementById('resSection').style.display='block';
+  document.getElementById('resLoc').textContent=loc;
+  document.getElementById('spinner').style.display='block';
+  document.getElementById('resList').innerHTML='';
+  document.getElementById('resSection').scrollIntoView({behavior:'smooth',block:'start'});
+
+  const city=cityFromInput(loc);
+  if(city&&LOCAL[city]){
+    setTimeout(()=>showResults(LOCAL[city],loc),300);
+    return;
+  }
+  // Unknown city — show chains as fallback quickly
+  setTimeout(()=>{
+    const fallback=CHAINS.slice(0,8).map(c=>({e:c.e,n:c.n,t:c.b,d:c.d,p:c.p,a:"Nationwide — check locally",c:"confirmed"}));
+    showResults(fallback,loc,true);
+  },500);
+}
+
+function showResults(data,loc,fallback=false){
+  document.getElementById('spinner').style.display='none';
+  document.getElementById('findBtn').disabled=false;
+  document.getElementById('cancelBtn').classList.remove('show');
+  const tmap={confirmed:['cc','✅ Confirmed'],likely:['cl','📋 Likely'],default:['ck','📞 Call Ahead']};
+  const intro=fallback
+    ?`<div class="res-intro"><strong>🌮 Showing national chain deals near ${loc}.</strong> We don't have specific local data for this area yet — these chains operate nationwide. Submit a local deal below to help the community!</div>`
+    :`<div class="res-intro"><strong>🌮 Found ${data.length} Taco Tuesday deals near ${loc}.</strong> Deals & hours can change — always confirm before heading out. ✅ Confirmed = documented deal · 📋 Likely = known to run Tuesdays · 📞 Call Ahead = verify first.</div>`;
+  document.getElementById('resList').innerHTML=intro+data.map((d,i)=>{
+    const[cls,lbl]=tmap[d.c]||tmap.default;
+    return`<div class="lcard" style="animation-delay:${i*.06}s">
+      <div class="licon">${d.e||'🌮'}</div>
+      <div class="lbody">
+        <div class="lname">${d.n} <span class="ctag ${cls}">${lbl}</span></div>
+        <div class="ltype">${d.t||'Restaurant'}</div>
+        <div class="ldeal">${d.d}</div>
+        <div class="lmeta">📍 ${d.a||loc}</div>
+      </div>
+      <div class="lprice">${d.p||'?'}</div>
+    </div>`;
+  }).join('');
+}
+
+function cancel(){
+  if(abortCtrl)abortCtrl.abort();
+  document.getElementById('spinner').style.display='none';
+  document.getElementById('findBtn').disabled=false;
+  document.getElementById('cancelBtn').classList.remove('show');
+  document.getElementById('resList').innerHTML='<div class="no-res"><div>🛑</div><div style="color:var(--gold);font-size:1.1rem;font-weight:800">Search cancelled</div></div>';
+  toast('🛑 Search cancelled');
+}
+
+// ── SUBMIT ───────────────────────────────────────────────────────────────────
+function submitDeal(){
+  const n=document.getElementById('sName').value.trim();
+  const c=document.getElementById('sCity').value.trim();
+  const d=document.getElementById('sDeal').value.trim();
+  if(!n||!c||!d){toast('🌮 Fill in name, city & deal first!');return;}
+  ['sName','sCity','sDeal','sPrice','sNotes'].forEach(id=>document.getElementById(id).value='');
+  toast(`🌮 "${n}" submitted! Taco community thanks you!`);
+}
+
+// ── TOAST ────────────────────────────────────────────────────────────────────
+function toast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg;t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),3000);
+}
+</script>
+</body>
+</html>
